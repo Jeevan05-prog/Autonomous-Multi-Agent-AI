@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResearchFlow AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" data-page-link="dashboard">
+        <span class="brand-mark">R</span>
+        <span><strong>ResearchFlow</strong><small>AI WORKSPACE</small></span>
+      </a>
+
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav">
+        <button class="nav-item active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-item" data-page="research"><span>＋</span> New Research</button>
+        <button class="nav-item" data-page="agents"><span>✳</span> AI Agents</button>
+        <button class="nav-item" data-page="analytics"><span>▥</span> Analytics</button>
+        <button class="nav-item" data-page="reports"><span>▤</span> Reports</button>
+        <button class="nav-item" data-page="about"><span>ⓘ</span> About Project</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="system-card">
+          <span class="pulse-dot"></span>
+          <div><strong>System ready</strong><small>Six-agent workflow</small></div>
+        </div>
+        <div class="sidebar-foot">AUTONOMOUS MULTI-AGENT AI</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">AI RESEARCH WORKSPACE</div>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="status-pill"><span class="pulse-dot"></span> Backend ready</span>
+          <div class="avatar">RF</div>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- PAGE 1: DASHBOARD -->
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-panel">
+            <div class="welcome-copy">
+              <span class="tag">AUTONOMOUS RESEARCH SYSTEM</span>
+              <h2>Turn a question into<br><span class="gradient-text">research intelligence.</span></h2>
+              <p>Coordinate six specialized AI agents to plan, research, analyse, validate and create a structured report.</p>
+              <button class="primary-btn" data-page="research">Start new research <span>→</span></button>
+            </div>
+            <div class="orb-visual" aria-hidden="true">
+              <div class="orb-ring ring-one"></div><div class="orb-ring ring-two"></div>
+              <div class="orb-core">AI</div>
+              <span class="orbit-node node-a">P</span><span class="orbit-node node-b">R</span>
+              <span class="orbit-node node-c">D</span><span class="orbit-node node-d">✦</span>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div><h3>Workspace overview</h3><p>Your current research session</p></div>
+            <span class="muted-label">LIVE WORKSPACE</span>
+          </div>
+
+          <div class="stat-grid">
+            <article class="stat-card"><div class="stat-icon purple">✳</div><span class="stat-label">AI AGENTS</span><strong>06</strong><small>Connected in workflow</small></article>
+            <article class="stat-card"><div class="stat-icon blue">⌁</div><span class="stat-label">WORKFLOW</span><strong>LangGraph</strong><small>Conditional agent routing</small></article>
+            <article class="stat-card"><div class="stat-icon green">◉</div><span class="stat-label">RESEARCH MODES</span><strong>02</strong><small>Web only / Web + CSV</small></article>
+            <article class="stat-card"><div class="stat-icon orange">▤</div><span class="stat-label">OUTPUT</span><strong>Reports</strong><small>Markdown + charts</small></article>
+          </div>
+
+          <div class="two-column">
+            <article class="panel">
+              <div class="panel-heading"><div><h3>Six-agent pipeline</h3><p>Specialized agents work together in sequence</p></div><span class="live-indicator">● READY</span></div>
+              <div class="pipeline-mini">
+                <div class="pipeline-step"><span>01</span><b>Planner</b><small>Creates plan</small></div>
+                <div class="pipeline-step"><span>02</span><b>Researcher</b><small>Web sources</small></div>
+                <div class="pipeline-step"><span>03</span><b>Data Analyst</b><small>Data analysis</small></div>
+                <div class="pipeline-step"><span>04</span><b>Insight</b><small>Key findings</small></div>
+                <div class="pipeline-step"><span>05</span><b>Critic</b><small>Quality check</small></div>
+                <div class="pipeline-step"><span>06</span><b>Report</b><small>Final report</small></div>
+              </div>
+            </article>
+            <article class="panel quick-panel">
+              <div class="panel-heading"><div><h3>Start in seconds</h3><p>No CSV file is required</p></div></div>
+              <div class="quick-icon">✧</div>
+              <h4>What would you like to research?</h4>
+              <p>Run a web research workflow with a topic, or add a CSV file for deeper numerical analysis.</p>
+              <button class="secondary-btn full-btn" data-page="research">Open research workspace →</button>
+            </article>
+          </div>
+        </section>
+
+        <!-- PAGE 2: NEW RESEARCH -->
+        <section class="page" id="page-research">
+          <div class="page-intro"><span class="tag">CREATE A WORKFLOW</span><h2>What should the agents research?</h2><p>Enter a clear topic. A CSV file is optional.</p></div>
+          <div class="research-layout">
+            <div class="panel research-form-panel">
+              <form id="research-form">
+                <label for="topic">Research topic</label>
+                <textarea id="topic" name="topic" rows="4" placeholder="Example: Analyse the growth, market opportunities and challenges of electric vehicles in India..." required></textarea>
+                <div class="form-hint">Tip: Specific questions usually produce more focused research.</div>
+
+                <div class="divider"></div>
+                <div class="upload-heading"><div><label for="dataset">Upload dataset <span class="optional">OPTIONAL</span></label><p>Upload a CSV for statistical analysis and charts.</p></div><span class="file-symbol">CSV</span></div>
+                <label class="upload-box" for="dataset">
+                  <input type="file" id="dataset" name="dataset" accept=".csv,text/csv">
+                  <span class="upload-icon">↑</span>
+                  <strong id="file-name">Choose a CSV file or drag it here</strong>
+                  <small>CSV format · Maximum 20 MB · Optional</small>
+                </label>
+
+                <div class="mode-note"><span>✦</span><div><strong>Automatic mode selection</strong><p>Without CSV: web research and numerical evidence extraction. With CSV: web research plus dataset analysis.</p></div></div>
+                <button class="primary-btn submit-btn" id="start-btn" type="submit">Generate research <span>→</span></button>
+                <div class="form-error" id="form-error"></div>
+              </form>
+            </div>
+            <aside class="panel agent-preview">
+              <h3>What happens next?</h3><p class="subtext">Your request passes through six connected agents.</p>
+              <div class="preview-list">
+                <div><i>01</i><span><b>Planner</b><small>Breaks down your question</small></span></div>
+                <div><i>02</i><span><b>Researcher</b><small>Finds relevant web sources</small></span></div>
+                <div><i>03</i><span><b>Data Analyst</b><small>Analyses figures or CSV data</small></span></div>
+                <div><i>04</i><span><b>Insight</b><small>Builds meaningful findings</small></span></div>
+                <div><i>05</i><span><b>Critic</b><small>Checks research quality</small></span></div>
+                <div><i>06</i><span><b>Report</b><small>Creates the final report</small></span></div>
+              </div>
+              <div class="privacy-note">Your uploaded CSV is stored in this local project folder.</div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- PAGE 3: AGENTS -->
+        <section class="page" id="page-agents">
+          <div class="page-intro"><span class="tag">MULTI-AGENT ORCHESTRATION</span><h2>Agent control room</h2><p>Monitor the six specialized agents during a research run.</p></div>
+          <div class="run-banner"><div><span class="live-indicator" id="run-state-dot">● IDLE</span><h3 id="run-state-title">Waiting for a research task</h3><p id="run-state-subtitle">Start a new research workflow to see live progress here.</p></div><div class="run-progress"><strong id="progress-number">0%</strong><div class="progress-track"><span id="progress-bar"></span></div></div></div>
+          <div class="agent-grid" id="agent-grid">
+            <article class="agent-card" data-agent="planner"><div class="agent-top"><span class="agent-number">01</span><span class="agent-state">WAITING</span></div><div class="agent-symbol purple">P</div><h3>Planner Agent</h3><p>Converts the research topic into a structured plan and actionable tasks.</p></article>
+            <article class="agent-card" data-agent="researcher"><div class="agent-top"><span class="agent-number">02</span><span class="agent-state">WAITING</span></div><div class="agent-symbol blue">R</div><h3>Research Agent</h3><p>Searches the web, gathers source links and collects relevant evidence.</p></article>
+            <article class="agent-card" data-agent="data_analyst"><div class="agent-top"><span class="agent-number">03</span><span class="agent-state">WAITING</span></div><div class="agent-symbol cyan">D</div><h3>Data Analyst Agent</h3><p>Analyses uploaded CSV data or extracts numerical evidence from research.</p></article>
+            <article class="agent-card" data-agent="insight"><div class="agent-top"><span class="agent-number">04</span><span class="agent-state">WAITING</span></div><div class="agent-symbol green">✦</div><h3>Insight Agent</h3><p>Combines research and analysis into key findings and observations.</p></article>
+            <article class="agent-card" data-agent="critic"><div class="agent-top"><span class="agent-number">05</span><span class="agent-state">WAITING</span></div><div class="agent-symbol orange">✓</div><h3>Critic Agent</h3><p>Reviews the workflow output and can request another research round.</p></article>
+            <article class="agent-card" data-agent="report"><div class="agent-top"><span class="agent-number">06</span><span class="agent-state">WAITING</span></div><div class="agent-symbol pink">▤</div><h3>Report Agent</h3><p>Creates the final structured Markdown research report.</p></article>
+          </div>
+        </section>
+
+        <!-- PAGE 4: ANALYTICS -->
+        <section class="page" id="page-analytics">
+          <div class="page-intro"><span class="tag">DATA & VISUALIZATION</span><h2>Research analytics</h2><p>Charts and analysis generated by the Data Analyst Agent.</p></div>
+          <div class="analytics-note" id="analytics-note">Run a research workflow with a CSV dataset to generate charts. In web-only mode, numerical evidence is summarized in the analysis output.</div>
+          <div class="chart-grid">
+            <article class="panel chart-panel"><div class="panel-heading"><div><h3>Total trend</h3><p>Generated from an uploaded dataset</p></div></div><img class="chart-image" id="chart-total" alt="Total trend chart" hidden><div class="chart-empty" id="empty-total">No chart generated yet</div></article>
+            <article class="panel chart-panel"><div class="panel-heading"><div><h3>Category trends</h3><p>Comparison across data categories</p></div></div><img class="chart-image" id="chart-category" alt="Category trends chart" hidden><div class="chart-empty" id="empty-category">No chart generated yet</div></article>
+            <article class="panel chart-panel chart-wide"><div class="panel-heading"><div><h3>Latest share</h3><p>Category contribution in the latest period</p></div></div><img class="chart-image" id="chart-share" alt="Latest share chart" hidden><div class="chart-empty" id="empty-share">No chart generated yet</div></article>
+          </div>
+          <article class="panel output-panel"><div class="panel-heading"><div><h3>Data analyst output</h3><p>Numerical evidence or CSV analysis</p></div></div><pre id="analysis-output" class="output-text">Analysis will appear here after a workflow completes.</pre></article>
+        </section>
+
+        <!-- PAGE 5: REPORTS -->
+        <section class="page" id="page-reports">
+          <div class="page-intro"><span class="tag">FINAL DELIVERABLE</span><h2>Research reports</h2><p>Review the generated report and download it for your records.</p></div>
+          <div class="report-toolbar"><div><span class="live-indicator" id="report-status">● NO REPORT YET</span><h3 id="report-topic">Your report will appear here</h3></div><a class="secondary-btn disabled-link" id="download-report" href="#" aria-disabled="true">Download Markdown ↓</a></div>
+          <article class="panel report-panel"><pre id="report-content" class="report-content">Start a research workflow to generate your first report.</pre></article>
+          <div class="two-column report-lower">
+            <article class="panel"><h3>Key insights</h3><pre id="insights-output" class="output-text">Insights will appear here.</pre></article>
+            <article class="panel"><h3>Critic review</h3><pre id="critique-output" class="output-text">Quality review will appear here.</pre></article>
+          </div>
+        </section>
+
+        <!-- PAGE 6: ABOUT -->
+        <section class="page" id="page-about">
+          <div class="page-intro"><span class="tag">PROJECT OVERVIEW</span><h2>About ResearchFlow AI</h2><p>An autonomous multi-agent workflow orchestration platform.</p></div>
+          <div class="panel about-hero"><div class="about-logo">R</div><div><h2>ResearchFlow AI</h2><p>From a research question to a structured, evidence-aware report — powered by six cooperating agents.</p></div></div>
+          <div class="about-grid">
+            <article class="panel"><h3>Orchestration</h3><p>LangGraph connects the agents, manages their shared state and supports conditional routing when the Critic requests more research.</p></article>
+            <article class="panel"><h3>Language model</h3><p>Gemini supports AI-powered planning and summarization. Fallback behaviour in the existing project can keep parts of the workflow running if the model is unavailable.</p></article>
+            <article class="panel"><h3>Research & data</h3><p>DuckDuckGo search gathers web results. Pandas and Matplotlib process uploaded CSV files and generate visualizations.</p></article>
+            <article class="panel"><h3>Two operating modes</h3><p>Web Research Only works without a CSV. Research + Data Analysis combines external research with a user-provided CSV dataset.</p></article>
+          </div>
+          <div class="disclaimer">ResearchFlow AI is a research assistant. Always verify important claims and figures against the original sources. Web-only numerical evidence is extracted from source snippets and is not a substitute for a validated dataset.</div>
+        </section>
+
+        <footer class="footer">ResearchFlow AI <span>•</span> Autonomous Multi-Agent Workflow Orchestration</footer>
+      </div>
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

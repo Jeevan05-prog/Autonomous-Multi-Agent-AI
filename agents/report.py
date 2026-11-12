@@ -1,0 +1,272 @@
+import os
+
+from datetime import datetime
+
+from agents.llm import ask_gemini
+
+
+def report_agent(state):
+
+    print("\n========== REPORT AGENT ==========")
+
+    topic = state.get("user_request", "Research Report")
+
+    plan = state.get("plan", [])
+
+    research = state.get("research", "")
+
+    analysis = state.get("analysis", "")
+
+    insights = state.get("insights", "")
+
+    critique = state.get("critique", "")
+
+    prompt = f"""
+
+You are the Report Agent of ResearchFlow AI.
+
+Prepare a detailed, professional, academic-style research report.
+
+EXACT RESEARCH TOPIC:
+
+{topic}
+
+
+RESEARCH PLAN:
+
+{chr(10).join(str(x) for x in plan)}
+
+
+RESEARCH EVIDENCE:
+
+{research[:18000]}
+
+
+DATA ANALYSIS:
+
+{analysis[:10000]}
+
+
+INSIGHT AGENT FINDINGS:
+
+{insights[:10000]}
+
+
+CRITIC REVIEW:
+
+{critique[:5000]}
+
+
+REPORT STRUCTURE:
+
+# Research Report Title
+
+## Executive Summary
+
+Explain the entire research in a concise but meaningful way.
+
+## 1. Introduction and Background
+
+Explain the topic, its importance and why it deserves research.
+
+## 2. Theoretical Background
+
+Explain the important concepts, terminology and technologies.
+
+## 3. How the Topic Works
+
+Explain the underlying processes and mechanisms step by step.
+
+## 4. Historical Development
+
+Explain how the topic developed over time.
+
+## 5. Current Landscape
+
+Discuss developments within the requested date range.
+
+## 6. Evidence-Based Findings
+
+Explain the important findings using collected evidence.
+
+Include source references where available.
+
+## 7. Real-World Applications and Case Studies
+
+Explain practical applications and relevant examples.
+
+## 8. Benefits and Opportunities
+
+Discuss the positive impact and opportunities.
+
+## 9. Challenges, Risks and Limitations
+
+Explain the major problems and limitations.
+
+## 10. Data Analysis and Interpretation
+
+Explain the available numerical evidence.
+
+If no CSV was uploaded, clearly state that raw dataset
+analysis and dataset-based charts were not performed.
+
+Do not introduce unrelated EV-market data.
+
+## 11. Critical Discussion
+
+Compare findings, discuss uncertainties and explain
+what the evidence does and does not establish.
+
+## 12. Future Outlook
+
+Discuss possible future developments.
+Clearly distinguish forecasts from established facts.
+
+## 13. Recommendations
+
+Provide practical recommendations based on the findings.
+
+## 14. Conclusion
+
+Provide a meaningful conclusion that answers the research question.
+
+## Research Methodology and Limitations
+
+Explain the research approach and limitations.
+
+## References
+
+List the source URLs supplied by the Research Agent.
+
+
+QUALITY REQUIREMENTS:
+
+- Write detailed paragraphs, not just bullet points.
+- Explain theory in a way a student can understand.
+- Use meaningful examples.
+- Do not repeat the same information in every section.
+- Stay focused on the exact research topic.
+- Never invent statistics or references.
+- Preserve source URLs.
+- Explain the meaning of important findings.
+- Do not claim that a graph exists if no suitable dataset was analysed.
+- Clearly distinguish research facts, interpretations and forecasts.
+- Do not fill missing evidence with guesses.
+- Do not make the report a description of the six agents.
+
+The final report should read like a proper research document,
+not a short AI-generated summary.
+
+"""
+
+
+    try:
+
+        report_body = ask_gemini(prompt).strip()
+
+        if len(report_body) < 1200:
+
+            raise ValueError(
+                "Generated report was too short."
+            )
+
+    except Exception as exc:
+
+        report_body = f"""
+
+# Research Report: {topic}
+
+
+## Executive Summary
+
+This report examines {topic} using the research material
+collected by ResearchFlow AI.
+
+The strength of the conclusions depends on the available evidence.
+
+
+## 1. Introduction and Background
+
+{topic} is the focus of this research.
+
+The collected research findings are presented below.
+
+
+## 2. Research Plan
+
+""" + "\n".join(
+            f"{i}. {item}"
+            for i, item in enumerate(plan, 1)
+        ) + f"""
+
+
+## 3. Research Findings
+
+{research or "No research findings were returned."}
+
+
+## 4. Data Analysis
+
+{analysis or "No data analysis was returned."}
+
+
+## 5. Critical Insights
+
+{insights or "No insight output was returned."}
+
+
+## 6. Quality Review
+
+{critique or "No critic review was returned."}
+
+
+## 7. Conclusion
+
+The available evidence should be carefully assessed
+before drawing broad conclusions.
+
+
+## Methodology and Limitations
+
+The workflow uses six agents to collect, analyse and
+interpret research information.
+
+Search snippets are not equivalent to a systematic
+literature review.
+
+No unsupported numerical claims have been added.
+
+
+*Detailed AI report generation was unavailable during
+this run ({type(exc).__name__}).*
+
+"""
+
+
+    report = f"""
+
+<!-- Generated {datetime.now().strftime("%Y-%m-%d %H:%M:%S")} -->
+
+{report_body}
+
+---
+
+*Generated by ResearchFlow AI. Verify important claims against original sources.*
+
+"""
+
+    os.makedirs("outputs", exist_ok=True)
+
+    with open(
+        "outputs/final_report.md",
+        "w",
+        encoding="utf-8"
+    ) as f:
+
+        f.write(report)
+
+    state["final_report"] = report
+
+    print("Final report generated: outputs/final_report.md")
+
+    return state
